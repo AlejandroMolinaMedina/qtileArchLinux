@@ -49,20 +49,20 @@ class BarRotator:
             actual = int(open("/sys/class/backlight/intel_backlight/brightness").read())
             max_b = int(open("/sys/class/backlight/intel_backlight/max_brightness").read())
             percent = int((actual / max_b) * 100)
-            return f"󰃟 {percent}%"
+            return f"🔆 {percent}%"
         except:
-            return "󰃟 --%"
+            return "🔆 --%"
 
     def get_volume(self):
         try:
             res = subprocess.check_output(["pactl", "get-sink-volume", "@DEFAULT_SINK@"]).decode("utf-8")
             mute = subprocess.check_output(["pactl", "get-sink-mute", "@DEFAULT_SINK@"]).decode("utf-8")
             if "yes" in mute:
-                return "󰝟 Muted"
+                return "🔇 Muted"
             vol = re.search(r"(\d+)%", res).group(1)
-            return f"󰕾 {vol}%"
+            return f"🔉 {vol}%"
         except:
-            return "󰕾 --%"
+            return "🔉 --%"
 
     def get_clock(self):
         return datetime.now().strftime("%d-%m-%Y %a %H:%M:%S")
