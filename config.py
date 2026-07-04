@@ -89,7 +89,7 @@ keys = [
 
     #Lanzador
     Key([mod], "space", lazy.spawn("rofi -show drun -theme ~/.config/rofi/launchers/type-4/style-3.rasi"), desc="Move window focus to other window"),
-    Key([mod], "s", lazy.spawn("/home/al3xmm14/.config/rofi/applets/bin/powermenu.sh"), desc="PowerMenu"),
+    Key([mod], "l", lazy.spawn("/home/al3xmm14/.config/rofi/applets/bin/quicklinks.sh"), desc="quicklinks"),
     #Teclas de sonido
     # TECLAS MULTIMEDIA (ASUS TUF F15)
     # Vol++
