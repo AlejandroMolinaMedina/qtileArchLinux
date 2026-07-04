@@ -38,7 +38,7 @@ class autostart:
         apps = [
             ["libinput-gestures-setup", "start"],
             ["autorandr", "--change"],
-            ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
+           #s ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
             ['pkill', '-f', 'wallpaper.sh'],
         ]
 
