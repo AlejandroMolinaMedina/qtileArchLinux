@@ -120,7 +120,20 @@ yay -S --needed - < packageInstall/aurlist.txt
 
 ---
 
-## 🧪 Pruebas, Validación y Depuración
+## 🚀 Flujo de Trabajo con Ramas (Git Workflow)
+
+Para asegurar la estabilidad de la rama principal (`master`), se establece el siguiente protocolo antes de realizar cualquier commit o subida de cambios:
+
+1. **Verificación de Rama**:
+   - Si se detecta que la rama actual es `master`, se debe crear una nueva rama de trabajo antes de proceder con cualquier modificación.
+   - Si ya se está en una rama de trabajo, antes de realizar el commit y subir los cambios, se debe asegurar que dicha rama esté sincronizada realizando un `git pull` desde `master`.
+
+2. **Acciones**:
+   - **En rama `master`**: Crear rama (ej. `git checkout -b feature/nombre-cambio`), realizar commits y subir (push).
+   - **En rama de trabajo**: Actualizar (`git pull origin master`), realizar commits y subir (push).
+
+---
+
 
 ### Cómo verificar cambios antes de aplicar o reiniciar Qtile:
 
