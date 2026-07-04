@@ -86,9 +86,9 @@ class BarRotator:
         try:
             # Obtiene el uso de CPU promedio basado en top
             cpu_usage = subprocess.check_output("top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'", shell=True).decode("utf-8").strip()
-            return f" {cpu_usage}%"
+            return f"🔲 {cpu_usage}%"
         except:
-            return " --%"
+            return "🔲 --%"
 
     def get_ram(self):
         try:
@@ -96,15 +96,15 @@ class BarRotator:
             mem = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open('/proc/meminfo').readlines())
             used = mem['MemTotal'] - mem['MemAvailable']
             percent = int((used / mem['MemTotal']) * 100)
-            return f" {percent}%"
+            return f"🧬 {percent}%"
         except:
-            return " --%"
+            return "🧬 --%"
 
     def get_disk(self):
         try:
             # Calcula el uso de almacenamiento raíz
             total, used, free = shutil.disk_usage("/")
             percent = int((used / total) * 100)
-            return f"󰋊 {percent}%"
+            return f"📂 {percent}%"
         except:
-            return "󰋊 --%"
+            return "📂 --%"
