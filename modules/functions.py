@@ -3,6 +3,7 @@ import subprocess
 import asyncio
 from datetime import datetime
 import re
+import shutil
 from libqtile.log_utils import logger
 from libqtile.config import Key
 from libqtile.lazy import lazy
@@ -28,7 +29,10 @@ class BarRotator:
             f"<span foreground='#ffcc00'>{self.get_brightness()}</span>",  # 1
             f"<span foreground='#66ffff'>{self.get_volume()}</span>",      # 2
             f"<span foreground='#ffffff'>{self.get_clock()}</span>",       # 3
-            f"<span foreground='#ffffff'>{self.get_battery()}</span>"       # 4
+            f"<span foreground='#ffffff'>{self.get_battery()}</span>",      # 4
+            f"<span foreground='#ffffff'>{self.get_cpu()}</span>",        # 5
+            f"<span foreground='#ffffff'>{self.get_ram()}</span>",        # 6
+            f"<span foreground='#ffffff'>{self.get_disk()}</span>"         # 7
         ]
         
         # 2. Aplicamos la rotación de la lista usando el "shift" actual
@@ -85,6 +89,33 @@ class BarRotator:
             return f"{char} {capacity}%"
         except:
             return "🔋󰁹 --%"
+
+    def get_cpu(self):
+        try:
+            # Obtiene el uso de CPU promedio basado en top
+            cpu_usage = subprocess.check_output("top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'", shell=True).decode("utf-8").strip()
+            return f"🔲 {cpu_usage}%"
+        except:
+            return "🔲 --%"
+
+    def get_ram(self):
+        try:
+            # Calcula el uso de RAM leyendo /proc/meminfo
+            mem = dict((i.split()[0].rstrip(':'), int(i.split()[1])) for i in open('/proc/meminfo').readlines())
+            used = mem['MemTotal'] - mem['MemAvailable']
+            percent = int((used / mem['MemTotal']) * 100)
+            return f"🗄️ {percent}%"
+        except:
+            return "🗄️ --%"
+
+    def get_disk(self):
+        try:
+            # Calcula el uso de almacenamiento raíz
+            total, used, free = shutil.disk_usage("/")
+            percent = int((used / total) * 100)
+            return f"💾 {percent}%"
+        except:
+            return "💾 --%"
 
 def init_widgets_list(widget, rotator):
     widgets_list = [
