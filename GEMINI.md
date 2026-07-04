@@ -122,15 +122,16 @@ yay -S --needed - < packageInstall/aurlist.txt
 
 ## 🚀 Flujo de Trabajo con Ramas (Git Workflow)
 
-Para asegurar la estabilidad de la rama principal (`master`), se establece el siguiente protocolo antes de realizar cualquier commit o subida de cambios:
+Para asegurar la estabilidad de la rama principal (`master`), se establece el siguiente protocolo estricto:
 
-1. **Verificación de Rama**:
-   - Si se detecta que la rama actual es `master`, se debe crear una nueva rama de trabajo antes de proceder con cualquier modificación.
-   - Si ya se está en una rama de trabajo, antes de realizar el commit y subir los cambios, se debe asegurar que dicha rama esté sincronizada realizando un `git pull` desde `master`.
+1. **PROHIBIDO COMMIT DIRECTO**: Queda estrictamente prohibido realizar commits directamente sobre la rama `master`.
 
-2. **Acciones**:
-   - **En rama `master`**: Crear rama (ej. `git checkout -b feature/nombre-cambio`), realizar commits y subir (push).
-   - **En rama de trabajo**: Actualizar (`git pull origin master`), realizar commits y subir (push).
+2. **Verificación de Rama**:
+   - ANTES de realizar cualquier modificación, el desarrollador DEBE crear una nueva rama de trabajo: `git checkout -b feature/nombre-cambio`.
+   - Si ya se está en una rama de trabajo, antes de realizar el commit y subir los cambios, se debe asegurar que dicha rama esté sincronizada realizando un `git pull origin master`.
+
+3. **Acciones**:
+   - **En rama de trabajo**: Realizar commits, mantener sincronizado (`git pull origin master`), y crear Pull Request hacia `master`.
 
 ---
 
