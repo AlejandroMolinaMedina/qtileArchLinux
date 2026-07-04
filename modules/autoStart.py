@@ -40,6 +40,7 @@ class autostart:
             ["autorandr", "--change"],
            #s ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
             ['pkill', '-f', 'wallpaper.sh'],
+            ['xbindkeys'],
         ]
 
         for app in apps:
