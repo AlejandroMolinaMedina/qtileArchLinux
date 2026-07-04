@@ -7,7 +7,9 @@ from libqtile.config import Click, Drag, Group, Key, Match, Output, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import asyncio
-from modules.functions import init_widgets_list, BarRotator, get_available_group, add_new_group_manually, delete_current_group
+from modules.bar_rotator import BarRotator
+from modules.widgets import init_widgets_list
+from utils.group_manager import get_available_group, add_new_group_manually, delete_current_group, go_to_group, move_window_to_group
 from modules.autoStart import autostart
 from styles.barStyle import get_bar_style
 from utils.groups import groupTemplate
