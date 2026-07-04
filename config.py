@@ -11,6 +11,11 @@ from modules.functions import init_widgets_list, BarRotator, get_available_group
 from modules.autoStart import autostart
 from styles.barStyle import get_bar_style
 from utils.groups import groupTemplate
+
+# Obtener la plantilla de grupos y configuración de apps
+template_data = groupTemplate(Match)
+groups = [Group(name, label=label, matches=matches) for name, label, matches in template_data["groups"]]
+APPS_CONFIG = template_data["APPS_CONFIG"]
 import subprocess
 
 #from libqtile.log_utils import logger # <--- Importante para debug
