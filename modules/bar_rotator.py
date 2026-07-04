@@ -27,7 +27,8 @@ class BarRotator:
             f"<span foreground='#ffffff'>{self.get_battery()}</span>",      # 4
             f"<span foreground='#ffffff'>{self.get_cpu()}</span>",        # 5
             f"<span foreground='#ffffff'>{self.get_ram()}</span>",        # 6
-            f"<span foreground='#ffffff'>{self.get_disk()}</span>"         # 7
+            f"<span foreground='#ffffff'>{self.get_disk()}</span>",         # 7
+            f"<span foreground='#ffffff'>{self.get_net_speed()}</span>"      # 8
         ]
         
         # 2. Aplicamos la rotación de la lista usando el "shift" actual
@@ -108,3 +109,37 @@ class BarRotator:
             return f"📂 {percent}%"
         except:
             return "📂 --%"
+
+    def get_net_speed(self):
+        try:
+            # Simple approach: get default interface
+            interface = subprocess.check_output("ip route get 8.8.8.8 | awk '{print $5}'", shell=True).decode("utf-8").strip()
+            
+            # Read rx bytes
+            with open(f"/sys/class/net/{interface}/statistics/rx_bytes", "r") as f:
+                rx_bytes = int(f.read())
+            
+            # Store state
+            if not hasattr(self, 'net_last_rx'):
+                self.net_last_rx = rx_bytes
+                self.net_last_time = datetime.now()
+                return "🌐 0KB/s"
+                
+            now = datetime.now()
+            delta_time = (now - self.net_last_time).total_seconds()
+            if delta_time == 0: delta_time = 1
+            
+            speed = (rx_bytes - self.net_last_rx) / delta_time # bytes per second
+            
+            self.net_last_rx = rx_bytes
+            self.net_last_time = now
+            
+            # Format speed
+            if speed < 1024:
+                return f"🌐 {int(speed)}B/s"
+            elif speed < 1024 * 1024:
+                return f"🌐 {int(speed/1024)}KB/s"
+            else:
+                return f"🌐 {int(speed/(1024*1024))}MB/s"
+        except:
+            return "🌐 --"
