@@ -65,7 +65,8 @@ class BarRotator:
             return "🔉 --%"
 
     def get_clock(self):
-        return datetime.now().strftime("%d-%m-%Y %a %H:%M:%S")
+        # Formato limpio: 03/07/2026 - 15:30
+        return datetime.now().strftime("%d/%m/%Y - %H:%M")
 
     def get_battery(self):
         try:
