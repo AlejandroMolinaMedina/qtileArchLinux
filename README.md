@@ -25,6 +25,22 @@ Una configuración de **Qtile** altamente personalizada, modularizada y moderna 
 
 Este repositorio incluye scripts y listas de paquetes para una configuración rápida. Consulta los archivos en `packageInstall/` para instalar las dependencias necesarias.
 
+### 📋 Dependencias del Sistema
+Para que la configuración funcione correctamente, asegúrate de tener instalados los siguientes componentes:
+
+| Dependencia | Descripción | Documentación |
+| :--- | :--- | :--- |
+| **[Qtile](https://qtile.org/)** | Gestor de ventanas principal | [Docs](https://docs.qtile.org/) |
+| **[Picom](https://github.com/yshui/picom)** | Compositor (sombras, blur) | [Wiki](https://github.com/yshui/picom/wiki) |
+| **[Alacritty](https://alacritty.org/)** | Emulador de terminal | [Docs](https://alacritty.org/config-alacritty.html) |
+| **[Rofi](https://github.com/davatorium/rofi)** | Lanzador de aplicaciones | [Wiki](https://github.com/davatorium/rofi/wiki) |
+| **[libinput-gestures](https://github.com/bulletmark/libinput-gestures)** | Gestos de touchpad | [Repo](https://github.com/bulletmark/libinput-gestures) |
+| **[Flameshot](https://flameshot.org/)** | Capturas de pantalla | [Docs](https://flameshot.org/docs/) |
+| **[brightnessctl](https://github.com/Hummer12007/brightnessctl)** | Control de brillo | [Repo](https://github.com/Hummer12007/brightnessctl) |
+| **[Nerd Fonts](https://www.nerdfonts.com/)** | Iconos (JetBrainsMono, Symbols) | [Web](https://www.nerdfonts.com/) |
+
+Adicionalmente, instala los paquetes listados en `packageInstall/` usando tu gestor de paquetes (`pacman`/`yay` en Arch Linux).
+
 ## 🤝 Contribuciones y Estándares
 
 Para mantener el historial de commits ordenado, por favor sigue nuestras **[Convenciones de Commit](COMMIT_CONVENTIONS.md)**.
