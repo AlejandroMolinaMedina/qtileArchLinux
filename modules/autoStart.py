@@ -38,8 +38,8 @@ class autostart:
         apps = [
             ["libinput-gestures-setup", "start"],
             ["autorandr", "--change"],
-           #s ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
-            ['pkill', '-f', 'wallpaper.sh'],
+            ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
+            ['pkill', '-f', 'wallpaper_daemon.sh'],
             ['xbindkeys'],
         ]
 
@@ -59,9 +59,9 @@ class autostart:
         except Exception:
             pass
 
-        # Tu script de wallpaper
+        # Demonio de wallpaper del proyecto
         try:
-            subprocess.Popen(f"bash {home}/.secrets/scripts/wallpaper.sh", shell=True)
+            subprocess.Popen(f"bash {home}/Documents/projects/qtileArchLinux/.scripts/wallpaper_daemon.sh", shell=True)
         except Exception:
             pass
 
