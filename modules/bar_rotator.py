@@ -105,7 +105,7 @@ class BarRotator:
     def get_disk(self):
         try:
             # Calcula el uso de almacenamiento raíz
-            total, used, free = shutil.disk_usage("/")
+            total, used, free = shutil.disk_usage("/home")
             percent = int((used / total) * 100)
             return f"📂 {percent}%"
         except:
