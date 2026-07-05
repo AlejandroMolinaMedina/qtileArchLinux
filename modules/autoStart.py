@@ -41,6 +41,8 @@ class autostart:
             ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
             ['pkill', '-f', 'wallpaper_daemon.sh'],
             ['xbindkeys'],
+            ['xinput', 'set-prop', 'ASUP1415:00 093A:300C Touchpad', 'libinput Tapping Enabled', '1'],
+            ['xinput', 'set-prop', 'ASUP1415:00 093A:300C Touchpad', 'libinput Click Method Enabled', '0', '1'],
         ]
 
         for app in apps:
