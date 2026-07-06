@@ -266,8 +266,7 @@ wmname = "LG3D"
 
 
 @hook.subscribe.startup_once
-#Quiero cargar mi funcion de autostart
-def start():
+def start_apps():
     autostart.startAppps()
 
 
