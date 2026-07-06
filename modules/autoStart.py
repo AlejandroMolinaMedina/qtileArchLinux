@@ -1,73 +1,41 @@
-import os, subprocess
+import os
+import subprocess
+from libqtile.log_utils import logger
 
 class autostart:
-    def __init__(self):
-        pass     
+    @staticmethod
     def startAppps():
         home = os.path.expanduser('~')
+        logger.info("Iniciando procesos de autostart...")
 
-        # =========================================================================
-        # 1. ORQUESTACIÓN DE ENTORNO (DBus y Gnome Keyring)
-        # =========================================================================
+        # Abrir un archivo de log para capturar salidas de las apps
+        log_file = open(os.path.expanduser('~/.local/share/qtile/apps.log'), 'a')
 
-        # Actualiza el entorno de DBus
-        try:
-            subprocess.Popen("dbus-update-activation-environment --all", shell=True)
-        except Exception:
-            pass
-
-        # Inicia el llavero y captura sus variables de entorno
-        try:
-            # Usamos check_output para esperar a que nos devuelva las variables impresas
-            output = subprocess.check_output(
-                "gnome-keyring-daemon --start --components=secrets,pkcs11,ssh", 
-                shell=True, 
-                text=True
-            )
-            # Parseamos las líneas tipo VARIABLE=VALOR y las metemos al entorno de Python
-            for line in output.splitlines():
-                if '=' in line:
-                    key, value = line.split('=', 1)
-                    os.environ[key] = value
-        except Exception:
-            pass
-
-        # =========================================================================
-        # 2. COMANDOS NORMALES Y CONFIGURACIÓN DEL SISTEMA
-        # =========================================================================
         apps = [
             ["libinput-gestures-setup", "start"],
             ["autorandr", "--change"],
             ['xss-lock', '--', 'transfer-sleep-lock', '--', 'i3lock', '-c', '000000'],
-            ['pkill', '-f', 'wallpaper_daemon.sh'],
-            ['xbindkeys'],
-            ['xinput', 'set-prop', 'ASUP1415:00 093A:300C Touchpad', 'libinput Tapping Enabled', '1'],
-            ['xinput', 'set-prop', 'ASUP1415:00 093A:300C Touchpad', 'libinput Click Method Enabled', '0', '1'],
+            ['xbindkeys']
         ]
 
         for app in apps:
             try:
-                subprocess.Popen(app)
-            except Exception:
-                pass
+                # Redirigimos la salida al log file para poder debugear
+                subprocess.Popen(app, stdout=log_file, stderr=log_file)
+                logger.info(f"Proceso lanzado: {' '.join(app)}")
+            except Exception as e:
+                logger.error(f"Error al ejecutar {' '.join(app)}: {e}")
 
-        # =========================================================================
-        # 3. INTERFAZ VISUAL (X11 / COMPOSITOR / WALLPAPER)
-        # =========================================================================
+        # Comandos complejos con shell=True
+        shell_cmds = [
+            f"picom --config {home}/.config/picom/picom.conf",
+            f"bash {home}/.secrets/scripts/wallpaper_daemon.sh",
+            "brightnessctl set 15%"
+        ]
 
-        # Picom
-        try:
-            subprocess.Popen(f"picom --config {home}/.config/picom/picom.conf", shell=True)
-        except Exception:
-            pass
-
-        # Demonio de wallpaper del proyecto
-        try:
-            subprocess.Popen(f"bash {home}/Documents/projects/qtileArchLinux/.scripts/wallpaper_daemon.sh", shell=True)
-        except Exception:
-            pass
-
-        try:
-            subprocess.Popen("brightnessctl set 15%", shell=True)
-        except Exception:
-            pass
+        for cmd in shell_cmds:
+            try:
+                subprocess.Popen(cmd, shell=True, stdout=log_file, stderr=log_file)
+                logger.info(f"Comando lanzado: {cmd}")
+            except Exception as e:
+                logger.error(f"Error al ejecutar {cmd}: {e}")
