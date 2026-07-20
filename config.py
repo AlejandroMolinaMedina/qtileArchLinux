@@ -107,6 +107,7 @@ keys = [
         lazy.spawn("brightnessctl set +1%")),
     Key([], "XF86MonBrightnessDown", 
         lazy.spawn("brightnessctl set 1%-")),
+    Key([], "XF86AudioMicMute", lazy.spawn(os.path.join(os.path.expanduser("~"), "Documents/projects/qtileArchLinux/.scripts/mic_manager.sh"))),
     # Bloquear y Suspender con Alt + L
     Key([windows], "l", lazy.spawn("bash -c 'i3lock -c 000000'"), desc="Suspender"),
     # Captura con formato: screenshot_2026-04-18_16-05.png
