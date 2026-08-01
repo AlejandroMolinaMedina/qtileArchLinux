@@ -3,6 +3,16 @@
 # Define el modo
 MODE=$1
 
+# Si no se pasa argumento, detectar y alternar
+if [ -z "$MODE" ]; then
+    CURRENT_SCHEME=$(gsettings get org.gnome.desktop.interface color-scheme)
+    if [ "$CURRENT_SCHEME" == "'prefer-dark'" ]; then
+        MODE="light"
+    else
+        MODE="dark"
+    fi
+fi
+
 if [ "$MODE" == "dark" ]; then
     # Aplicar modo oscuro para GTK
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
