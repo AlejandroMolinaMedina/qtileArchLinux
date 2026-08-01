@@ -11,6 +11,7 @@ from modules.bar_rotator import BarRotator
 from modules.widgets import init_widgets_list
 from utils.group_manager import get_available_group, add_new_group_manually, delete_current_group, go_to_group, move_window_to_group
 from modules.autoStart import autostart
+from modules.power_button_monitor import start_power_button_monitor
 from styles.barStyle import get_bar_style
 from utils.groups import groupTemplate
 
@@ -269,6 +270,7 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def start_apps():
     autostart.startAppps()
+    start_power_button_monitor()
 
 
 #Delay mouse/window
