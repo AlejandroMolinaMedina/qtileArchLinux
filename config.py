@@ -197,6 +197,7 @@ screens = [
     Screen(top=bar.Bar(init_widgets_list(widget, rotator), 28, **get_bar_style())),
     # Monitor Principal (HDMI-1)
     Screen(top=bar.Bar(init_widgets_list(widget, rotator), 28, **get_bar_style())),
+    Screen(top=bar.Bar(init_widgets_list(widget, rotator), 28, **get_bar_style())),
     
 ]
 
