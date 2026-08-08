@@ -1,50 +1,77 @@
 # Qtile Arch Linux Modular Configuration
 
-Una configuración de **Qtile** altamente personalizada, modularizada y moderna diseñada para **Arch Linux**. Este entorno está pensado para ser eficiente, estéticamente agradable y fácil de mantener.
+![Qtile](https://img.shields.io/badge/Qtile-Latest-blue)
+![Arch Linux](https://img.shields.io/badge/OS-Arch%20Linux-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+Una configuración de **Qtile** altamente personalizada, modular y moderna diseñada específicamente para **Arch Linux**. Este entorno está optimizado para ofrecer un flujo de trabajo eficiente, una estética minimalista y un mantenimiento sencillo mediante una estructura de archivos desacoplada.
 
 ## 🚀 Características Principales
 
-*   **BarRotator (Barra inteligente)**: Optimiza el espacio de la barra de estado mediante una rotación cíclica de métricas (brillo, volumen, reloj, batería).
-*   **Gestión Dinámica de Grupos**: Mapeo automático de aplicaciones a escritorios virtuales basado en `WM_CLASS` y capacidad de crear/eliminar grupos en tiempo real con reordenamiento numérico automático.
-*   **Estética Moderna**: Configuración curada de *Picom* (sombras, bordes redondeados, transparencias) y *Alacritty*.
-*   **Gestos Táctiles**: Integración fluida con `libinput-gestures`.
-*   **Mantenimiento Sencillo**: Estructura modular que separa la lógica de las funciones, los estilos y las reglas de los grupos.
+*   **BarRotator**: Gestión inteligente de la barra de estado mediante una rotación cíclica de métricas (brillo, volumen, reloj, batería) para maximizar el espacio disponible.
+*   **Gestión Dinámica de Grupos**: Mapeo automático de aplicaciones basado en `WM_CLASS`, con soporte para creación/eliminación en tiempo real y reordenamiento numérico.
+*   **Estética Moderna**: Configuración curada de `Picom` (efectos de desenfoque y transparencias) y `Alacritty` para una experiencia visual cohesiva.
+*   **Gestos Táctiles**: Integración avanzada con `libinput-gestures` para un control gestual intuitivo en dispositivos portátiles.
+*   **Modularidad**: Lógica separada por responsabilidades, facilitando la personalización de widgets, funciones auxiliares y reglas de usuario sin comprometer el archivo principal.
 
 ## 📂 Estructura del Proyecto
 
 ```text
-├── config.py                 # Punto de entrada y atajos de teclado
-├── modules/                  # Lógica de widgets y funciones auxiliares
-├── styles/                   # Estilos Pango/CSS de la barra
-├── utils/                    # Definición de grupos y reglas de aplicaciones
-├── packageInstall/           # Listas automatizadas de paquetes (Arch/Fedora)
-└── .scripts/                 # Herramientas de automatización
+├── alacritty/               # Configuración del terminal
+├── modules/                 # Lógica de widgets, funciones y autostart
+├── packageInstall/          # Listas de paquetes para Arch (pacman/AUR) y Fedora
+├── picom/                   # Configuración del compositor (blur/shadows)
+├── styles/                  # Estilos visuales de la barra (Pango/CSS)
+├── utils/                   # Gestión dinámica de grupos y reglas
+├── config.py                # Punto de entrada principal y atajos de teclado
+└── gestures/                # Configuración de libinput-gestures
 ```
 
 ## 🛠️ Instalación Rápida
 
-Este repositorio incluye scripts y listas de paquetes para una configuración rápida. Consulta los archivos en `packageInstall/` para instalar las dependencias necesarias.
+### 1. Requisitos Previos
+Asegúrate de tener un entorno gráfico base. Instala las dependencias necesarias utilizando los scripts proporcionados según tu distribución:
 
-### 📋 Dependencias del Sistema
-Para que la configuración funcione correctamente, asegúrate de tener instalados los siguientes componentes:
+*   **Arch Linux:** 
+    ```bash
+    sudo pacman -S --needed - < packageInstall/archLinux/pkglist.txt
+    # Opcional: Instalar paquetes AUR
+    yay -S --needed - < packageInstall/archLinux/aurlist.txt
+    ```
+*   **Fedora:**
+    ```bash
+    sudo dnf install $(cat packageInstall/fedora/pkglist.txt)
+    ```
 
-| Dependencia | Descripción | Documentación |
-| :--- | :--- | :--- |
-| **[Qtile](https://qtile.org/)** | Gestor de ventanas principal | [Docs](https://docs.qtile.org/) |
-| **[Picom](https://github.com/yshui/picom)** | Compositor (sombras, blur) | [Wiki](https://github.com/yshui/picom/wiki) |
-| **[Alacritty](https://alacritty.org/)** | Emulador de terminal | [Docs](https://alacritty.org/config-alacritty.html) |
-| **[Rofi](https://github.com/davatorium/rofi)** | Lanzador de aplicaciones | [Wiki](https://github.com/davatorium/rofi/wiki) |
-| **[libinput-gestures](https://github.com/bulletmark/libinput-gestures)** | Gestos de touchpad | [Repo](https://github.com/bulletmark/libinput-gestures) |
-| **[Flameshot](https://flameshot.org/)** | Capturas de pantalla | [Docs](https://flameshot.org/docs/) |
-| **[brightnessctl](https://github.com/Hummer12007/brightnessctl)** | Control de brillo | [Repo](https://github.com/Hummer12007/brightnessctl) |
-| **[Nerd Fonts](https://www.nerdfonts.com/)** | Iconos (JetBrainsMono, Symbols) | [Web](https://www.nerdfonts.com/) |
+### 2. Configuración
+Copia este repositorio en tu carpeta de configuración local:
+```bash
+git clone <url-del-repositorio> ~/.config/qtile
+```
 
-Adicionalmente, instala los paquetes listados en `packageInstall/` usando tu gestor de paquetes (`pacman`/`yay` en Arch Linux).
+### 3. Ejecución
+Reinicia tu sesión de X11/Wayland y selecciona `Qtile` en tu gestor de inicio de sesión (Display Manager).
+
+## 📋 Dependencias Clave
+
+| Dependencia | Rol |
+| :--- | :--- |
+| **Qtile** | Window Manager (Python-based) |
+| **Picom** | Compositor (transparencias y efectos) |
+| **Alacritty** | Emulador de terminal acelerado por GPU |
+| **Rofi** | Lanzador de aplicaciones y menús |
+| **libinput-gestures** | Soporte de gestos para touchpad |
+| **Flameshot** | Herramienta de capturas de pantalla |
 
 ## 🤝 Contribuciones y Estándares
 
-Para mantener el historial de commits ordenado, por favor sigue nuestras **[Convenciones de Commit](COMMIT_CONVENTIONS.md)**.
-*   Cada cambio debe ser un commit individual siguiendo el formato: `ADD(...)`, `UPDATE(...)` o `DELETE(...)`.
+El proyecto sigue un estándar estricto para mantener la calidad del historial de cambios. Antes de realizar cualquier contribución, consulta:
+
+*   **[COMMIT_CONVENTIONS.md](COMMIT_CONVENTIONS.md)**: Guía obligatoria para el formato de mensajes de commit (`ADD`, `UPDATE`, `DELETE`).
+*   **[GEMINI.md](GEMINI.md)**: Notas técnicas adicionales sobre el desarrollo.
+
+## 📝 Soporte
+Si encuentras un error o tienes una propuesta de mejora, abre un **Issue** en el repositorio. Para discusiones rápidas o dudas sobre la configuración, revisa la documentación oficial de [Qtile](https://docs.qtile.org/).
 
 ---
-*Configuración inspirada en un flujo de trabajo modular y eficiente para entornos Linux.*
+*Configuración mantenida bajo estándares de modularidad y eficiencia para entornos Linux.*
