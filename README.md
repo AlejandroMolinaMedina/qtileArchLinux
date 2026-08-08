@@ -52,14 +52,16 @@ Una configuración de **Qtile** altamente personalizada, modularizada y moderna,
 
 ## 📋 Dependencias Clave
 
-| Dependencia | Rol |
-| :--- | :--- |
-| **Qtile** | Window Manager (Python base) |
-| **Picom** | Compositor gráfico |
-| **Alacritty** | Terminal acelerada por GPU |
-| **Rofi** | Lanzador de aplicaciones y menús |
-| **libinput-gestures** | Soporte de gestos para touchpad |
-| **Flameshot** | Herramienta de capturas de pantalla |
+| Dependencia | Descripción | Documentación |
+| :--- | :--- | :--- |
+| **[Qtile](https://qtile.org/)** | Gestor de ventanas principal | [Docs](https://docs.qtile.org/) |
+| **[Picom](https://github.com/yshui/picom)** | Compositor (sombras, blur) | [Wiki](https://github.com/yshui/picom/wiki) |
+| **[Alacritty](https://alacritty.org/)** | Emulador de terminal | [Docs](https://alacritty.org/config-alacritty.html) |
+| **[Rofi](https://github.com/davatorium/rofi)** | Lanzador de aplicaciones | [Wiki](https://github.com/davatorium/rofi/wiki) |
+| **[libinput-gestures](https://github.com/bulletmark/libinput-gestures)** | Gestos de touchpad | [Repo](https://github.com/bulletmark/libinput-gestures) |
+| **[Flameshot](https://flameshot.org/)** | Capturas de pantalla | [Docs](https://flameshot.org/docs/) |
+| **[brightnessctl](https://github.com/Hummer12007/brightnessctl)** | Control de brillo | [Repo](https://github.com/Hummer12007/brightnessctl) |
+| **[Nerd Fonts](https://www.nerdfonts.com/)** | Iconos (JetBrainsMono, Symbols) | [Web](https://www.nerdfonts.com/) |
 
 ## 🤝 Mantenimiento y Contribución
 
