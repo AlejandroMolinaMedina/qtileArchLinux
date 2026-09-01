@@ -40,5 +40,3 @@ padding = { x = 10, y = 10 } # Un poco de margen mejora mucho la vista
 opacity = 0.8                # Cambia a 0.9 si quieres un toque traslúcido
 decorations = "full"         # Mantener la barra de título estándar
 
-
-
