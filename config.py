@@ -3,7 +3,7 @@ from collections.abc import Callable
 import libqtile.resources
 from libqtile.log_utils import logger
 from libqtile import bar, layout, qtile, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Output, Screen
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Output, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import asyncio
@@ -14,6 +14,7 @@ from modules.autoStart import autostart
 from modules.power_button_monitor import start_power_button_monitor
 from styles.barStyle import get_bar_style
 from utils.groups import groupTemplate
+from utils.macropad import macropadKeys
 
 # Obtener la plantilla de grupos y configuración de apps
 template_data = groupTemplate(Match)
@@ -29,19 +30,10 @@ import subprocess
 
 mod = "mod1"
 windows = "mod4"
+
 terminal = guess_terminal()
 
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
-    #Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    #Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    #Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    #Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    #Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),    
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
@@ -116,7 +108,7 @@ keys = [
     Key([windows, "shift"], "s", lazy.spawn("sh -c 'maim -s | tee ~/Images/screenshotArea_$(date +%Y-%m-%d_%H-%M-%S).png | xclip -selection clipboard -t image/png'")),
     # Minimizar / Esconder la ventana actual felcha abajo
     Key([windows], "Down", lazy.window.toggle_minimize(), desc="Toggle minimize"),
-    Key([windows], "space", lazy.hide_show_bar())
+    Key([windows], "space", lazy.hide_show_bar()),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -267,6 +259,8 @@ idle_inhibitors = []  # type: list
 wmname = "LG3D"
 
 
+keys2macros = macropadKeys(Key, windows, lazy)
+keys.extend(keys2macros)
 
 @hook.subscribe.startup_once
 def start_apps():
